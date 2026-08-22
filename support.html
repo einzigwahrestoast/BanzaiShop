@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Support</title>
+
+<style>
+
+    * {
+        box-sizing: border-box;
+    }
+
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+
+        width: 100%;
+        height: 100%;
+
+        overflow: hidden;
+
+        background: #000;
+
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+
+    /* ==================================================
+       HINTERGRUND
+       ================================================== */
+
+    .page {
+        position: relative;
+
+        width: 100vw;
+        height: 100vh;
+
+        background-image: url("Bilder/support.png");
+
+        background-position: center;
+        background-repeat: no-repeat;
+
+        background-size: contain;
+
+        background-color: #000;
+    }
+
+
+    /* ==================================================
+       CHATBOX
+       ================================================== */
+
+    .chat-box {
+
+        position: absolute;
+
+        top: 18%;
+        right: 7%;
+
+        width: 40%;
+        height: 67%;
+
+        min-width: 300px;
+        min-height: 350px;
+
+        display: flex;
+        flex-direction: column;
+
+        background: rgba(59, 59, 63, 0.690);
+
+        border: 1px solid rgba(255, 255, 255, 0);
+
+        border-radius: 28px;
+
+        box-shadow:
+            0 20px 60px rgba(0, 0, 0, 0.55),
+            inset 0 1px 0 rgba(255, 255, 255, 0.06);
+
+        overflow: hidden;
+    }
+
+
+    /* ==================================================
+       CHAT HEADER
+       ================================================== */
+
+    .chat-header {
+
+        display: flex;
+        align-items: center;
+
+        padding: 16px 20px;
+
+        min-height: 70px;
+
+        background: rgba(25, 21, 21, 0.22);
+
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+
+    .bot-avatar {
+
+        width: 42px;
+        height: 42px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        margin-right: 12px;
+
+        border-radius: 50%;
+
+        background: linear-gradient(
+            135deg,
+            #ffffff,
+            #bcbcbc
+        );
+
+        color: #111;
+
+        font-size: 21px;
+
+        box-shadow:
+            0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+
+    .header-text {
+        color: white;
+    }
+
+
+    .header-title {
+
+        font-size: 17px;
+
+        font-weight: bold;
+
+        letter-spacing: 0.3px;
+    }
+
+
+    .header-status {
+
+        margin-top: 4px;
+
+        font-size: 12px;
+
+        color: #78e08f;
+    }
+
+
+    /* ==================================================
+       NACHRICHTEN
+       ================================================== */
+
+    .messages {
+
+        flex: 1;
+
+        min-height: 0;
+
+        padding: 18px;
+
+        overflow-y: auto;
+
+        scrollbar-width: thin;
+
+        scrollbar-color: #555 transparent;
+    }
+
+
+    .messages::-webkit-scrollbar {
+        width: 5px;
+    }
+
+
+    .messages::-webkit-scrollbar-thumb {
+
+        background: #555;
+
+        border-radius: 10px;
+    }
+
+
+    /* ==================================================
+       CHAT BUBBLES
+       ================================================== */
+
+    .message {
+
+        width: fit-content;
+
+        max-width: 78%;
+
+        margin-bottom: 12px;
+
+        padding: 11px 14px;
+
+        border-radius: 16px;
+
+        font-size: 14px;
+
+        line-height: 1.45;
+
+        word-wrap: break-word;
+
+        animation: appear 0.2s ease;
+    }
+
+
+    @keyframes appear {
+
+        from {
+            opacity: 0;
+            transform: translateY(5px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+
+    /* Bot */
+
+    .bot {
+
+        margin-right: auto;
+
+        color: #fff;
+
+        background: rgba(255, 255, 255, 0.10);
+
+        border: 1px solid rgba(255, 255, 255, 0.06);
+
+        border-bottom-left-radius: 4px;
+    }
+
+
+    /* Benutzer */
+
+    .user {
+
+        margin-left: auto;
+
+        color: #111;
+
+        background: #ffffff;
+
+        border-bottom-right-radius: 4px;
+
+        box-shadow:
+            0 3px 10px rgba(0, 0, 0, 0.2);
+    }
+
+
+    /* ==================================================
+       SCHREIB-ANIMATION
+       ================================================== */
+
+    .typing {
+
+        display: none;
+
+        width: fit-content;
+
+        margin-bottom: 12px;
+
+        padding: 10px 14px;
+
+        color: #aaa;
+
+        background: rgba(255, 255, 255, 0.08);
+
+        border-radius: 16px;
+
+        border-bottom-left-radius: 4px;
+
+        font-size: 13px;
+    }
+
+
+    .dots span {
+
+        display: inline-block;
+
+        animation: blink 1.2s infinite;
+    }
+
+
+    .dots span:nth-child(2) {
+        animation-delay: 0.2s;
+    }
+
+
+    .dots span:nth-child(3) {
+        animation-delay: 0.4s;
+    }
+
+
+    @keyframes blink {
+
+        0%, 60%, 100% {
+            opacity: 0.25;
+        }
+
+        30% {
+            opacity: 1;
+        }
+    }
+
+
+    /* ==================================================
+       EINGABEBEREICH
+       ================================================== */
+
+    .input-area {
+
+        display: flex;
+
+        gap: 8px;
+
+        padding: 12px;
+
+        background: rgba(0, 0, 0, 0.25);
+
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+
+    #input {
+
+        flex: 1;
+
+        min-width: 0;
+
+        height: 44px;
+
+        padding: 0 15px;
+
+        outline: none;
+
+        border: 1px solid rgba(255, 255, 255, 0.12);
+
+        border-radius: 13px;
+
+        background: rgba(255, 255, 255, 0.08);
+
+        color: white;
+
+        font-size: 14px;
+    }
+
+
+    #input::placeholder {
+        color: #999;
+    }
+
+
+    #input:focus {
+
+        border-color: rgba(255, 255, 255, 0.3);
+
+        background: rgba(255, 255, 255, 0.11);
+    }
+
+
+    #send {
+
+        width: 45px;
+        height: 44px;
+
+        flex-shrink: 0;
+
+        border: none;
+
+        border-radius: 13px;
+
+        background: white;
+
+        color: #111;
+
+        font-size: 18px;
+
+        cursor: pointer;
+
+        transition: 0.15s;
+    }
+
+
+    #send:hover {
+
+        transform: scale(1.04);
+
+        background: #e8e8e8;
+    }
+
+
+    #send:active {
+
+        transform: scale(0.96);
+    }
+
+
+    /* ==================================================
+       HANDY
+       ================================================== */
+
+    @media (max-width: 800px) {
+
+        .chat-box {
+
+            top: 10%;
+            right: 5%;
+
+            width: 90%;
+            height: 80%;
+
+            min-width: 0;
+        }
+    }
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="page">
+
+
+    <!-- ==================================================
+         CHAT
+         ================================================== -->
+
+    <div class="chat-box">
+
+
+        <!-- HEADER -->
+
+        <div class="chat-header">
+
+            <div class="bot-avatar">
+                🐟
+            </div>
+
+            <div class="header-text">
+
+                <div class="header-title">
+                    Bohnsai-Bot
+                </div>
+
+                <div class="header-status">
+                    ● Online
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ==================================================
+             NACHRICHTEN
+             ================================================== -->
+
+        <div
+            class="messages"
+            id="messages"
+        >
+
+            <div class="message bot">
+
+                Hallo! 👋<br><br>
+
+                Willkommen beim offiziellen Banzai-Shop Support. <br>
+
+                Wie kann ich Ihnen helfen?
+
+            </div>
+
+
+            <div
+                class="typing"
+                id="typing"
+            >
+
+                Bohnsai schreibt
+
+                <span class="dots">
+                    <span>.</span>
+                    <span>.</span>
+                    <span>.</span>
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- ==================================================
+             EINGABE
+             ================================================== -->
+
+        <div class="input-area">
+
+            <input
+                id="input"
+                type="text"
+                placeholder="Stelle eine Frage zu Produkten, Support, Empfehlungen..."
+                autocomplete="off"
+            >
+
+            <button
+                id="send"
+                onclick="sendMessage()"
+            >
+                ➤
+            </button>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+
+/* ==========================================================
+   ==========================================================
+   
+   HIER DEINE WÖRTER UND ANTWORTEN EINTRAGEN
+
+   ==========================================================
+   ========================================================== */
+
+
+const antworten = [
+
+
+    {
+        woerter: [
+            "helfen",
+            "hilfe",
+            "help",
+            "aaah"
+        ],
+
+        antwort: [
+            "Natürlich, ich helfe ihnen gerne.",
+            "Das war übrigens gelogen."
+    ]
+    },
+
+    {
+        woerter: [
+            "magst du banzai",
+            "was denkst du über banzai",
+            "wie findest du banzai",
+            "magst du chuck",
+            "was denkst du über chuck",
+            "wie findest du chuck"
+        ],
+
+        antwort:
+            "BanzaiChuck? Der ist mir ganz Sympatisch"
+    },
+
+                {
+        woerter: [
+            "Wer ist Banzai",
+            "Wer ist dieser Chuck"
+        ],
+
+        antwort:
+            "Chuck ist... mein Herr und Gebieter."
+    },
+
+
+        {
+        woerter: [
+            "ich heiße",
+            "ich bin",
+            "ist mein Name",
+            "mein name ist"
+        ],
+
+        antwort: [
+            "Hi, mein Name ist Nohnsai Bot, wenn du Fragen zu unseren Produkten, Problemen oder Empfehlungen hast, helfe ich dir gerne weiter."
+    ]
+    },
+
+
+        {
+        woerter: [
+            "Wie bist du entstanden",
+            "Wer hat dich"
+        ],
+
+        antwort:
+            "Ich bin Bonsai-Bot, als Toast vor einer Weile den Banzashop erstellte, führte der Support Button zu einer Art impressum, diese Seite wollte er nun aber durch einen Support Bot austauschen. Wenn du zum alten Impressum möchtest, findest du es hier: https://einzigwahrestoast.github.io/BanzaiShop/impressum "
+    },
+
+                {
+        woerter: [
+            "Wer bist du"
+        ],
+
+        antwort:
+            "Ich bin eine Javascript Datei mit zu viel Selbstbewustsein."
+    },
+
+            {
+        woerter: [
+            "bist du dumm",
+            "bist du blöd",
+            "bist dumm",
+            "bist blöd",
+            "dumm",
+            "dämlich",
+            "blöd",
+            "deppert"
+        ],
+
+        antwort:
+            "Normalerweise sitzt das Problem vor dem Computer. :p"
+    },
+
+    {
+        woerter: [
+            "preis",
+            "kosten",
+            "kostet",
+            "teuer"
+        ],
+
+        antwort:
+            "Die Preise der Produkte finden sie auf den einzelden Verkaufsseiten. Unsere Preise wurden von usnerem professionellem Team genaustens berechnet, so das wir ab ca. 1 Mio. verkauften Einheiten pro Produkt einen Gewinn erzielen. Keider kann ich ihnen daher keinen Rabatt anbieten..."
+    },
+
+    {
+        woerter: [
+            "gutschein",
+            "rabatt",
+            "billiger",
+        ],
+
+        antwort:
+            "Ich tue mal so, als hätte ich sie nicht verstanden. Wir alle wissen, das ein Chatbot keine Rabatte geben sollte. Das kann nur schief gehen." 
+    },
+
+    {
+        woerter: [
+            "rückgabe",
+            "retoure",
+            "zurück",
+            "zurückgeben"
+        ],
+
+        antwort:
+            "Eine Rückgabe ist grundsätzlich möglich. Unser Rückgabeformular wurde allerdings zuletzt im Jahr 2017 gesehen."
+    },
+{
+            woerter: [
+            "empfehlung",
+            "empfehlen"
+        ],
+
+        antwort:
+            "Ich persönlich empfehle Ihnen das Bodypillow, zumindest so persönlich, wie eine geskriptete Antwort sein kann."
+    },
+
+        {
+        woerter: [
+            "stornier"
+        ],
+
+        antwort:
+            "Selbstverständlich können sie ihre Bestellung stornieren, allerdings erst nach der Ankunft des Pakets."
+    },
+
+    {
+        woerter: [
+            "bestellung",
+            "bestellen",
+            "paket",
+            "versand",
+            "lieferung",
+            "lieferzeit",
+            "wann kommt",
+            "ankommt"
+        ],
+
+        antwort:
+            "Ihre Bestellung befindet sich bereits in der Bearbeitung. Wo genau sie sich befindet, ist momentan Gegenstand einer internen Untersuchung."
+    },
+
+        {
+        woerter: [
+            "angebot",
+            "produkte"
+        ],
+
+        antwort:
+            "Das Angebot des BanzaiShops ist sehr vielseitig, wir haben Bodypillows, getragene T-shirts, ein Kochset, Duschgel und ein Videospiel. Am beliebtesten ist übrigens das Bodypillow. Ich habe auch eins und kann nicht mehr ohne schlafen."
+    },
+
+        {
+        woerter: [
+            "funktioniert nicht",
+            "kaputt",
+            "defekt",
+            "geht nicht",
+            "broken",
+            "tut nicht"
+        ],
+
+        antwort:
+            "Das Produkt ist selbstverständlich nicht kaputt. Es befindet sich lediglich in einem Zustand eingeschränkter Funktionalität."
+
+    },
+
+        {
+        woerter: [
+            "doom",
+            "id-software",
+            "videospiel"
+        ],
+
+        antwort:
+            "Doom Limited Fan Edition Integrate Deluxe Pack ist eine spezielle Version mit Banzai als Protagonist. Sie wurde spezifisch für ihn und seine Fand entwickelt und ausschließlich hier verkauft. Mehr Informationen finden sie auf der Produktseite."
+    },
+
+    {
+        woerter: [
+            "bodypillow",
+            "kissen",
+            "body",
+            "pillow"
+        ],
+
+        antwort:
+            "Das Banzai Bodypillow, der Favorit unserer Produkte, ist ein Kissen in einer nicht näher definierten Größe, auf welchem ein unbearbeitetes Bild von Banzai aufgedruckt ist, es ist perfekt für alle Fans, oder auch für alle, die einen Seltsamen Blick des Vermieters hervorrufen möchten. Zu guter Letzt macht es sich auch gut im Hintergrund eines Streaming Zimmers, anstelle eines Papaufstellers. Mehr Informationen finden sie unter https://einzigwahrestoast.github.io/BanzaiShop/bodypillow"
+    },
+
+    {
+        woerter: [
+            "kochset",
+            "kochen",
+            "k.o.c.h.s.e.t",
+            "tasse",
+            "pfanne"
+        ],
+
+        antwort:
+            "Das K.o.c.h.s.e.t besteht aus einer Tasse mit einem Gesicht des Tages und einem Farbwechselnden Discopanzer und einer Pfanne als Aufdruck, welche Banzais Gesicht beinhaltet. Mehr Informationen finden sie unter https://einzigwahrestoast.github.io/BanzaiShop/kochset"
+    },
+
+
+    {
+        woerter: [
+            "duschgel",
+            "duschen",
+            "bohngel"
+        ],
+
+        antwort:
+            "Das Banzai Duschgel ist eine gratis Zugabe zu jedem bestellten Produkt. Wenn sie also 3 Artikel bestellen bekommen sie 3 Duschgels gratis dazu. Mehr Informationen finden sie unter https://einzigwahrestoast.github.io/BanzaiShop/duschgel"
+    },
+
+
+    {
+        woerter: [
+            "shirt"
+        ],
+
+        antwort:
+            "Das Chuck-Shirt ist ein T-shirt, welches von Banzai höchstpersönlich getragen wurde. Es ist in allen Größen erhältlich und kann unter https://einzigwahrestoast.github.io/BanzaiShop/shirt bestellt werden."
+    },
+
+
+    {
+        woerter: [
+            "collection"
+        ],
+
+        antwort:
+            "Die Banzai Chuck Collection ist eine Sammlung des ofiziellen Merchandizes von Banzai. Erhältlich sind diese Produkte im Banzaishop unter https://einzigwahrestoast.github.io/BanzaiShop. Das Sortiment beinhaltet einige hochqualitative Produkte für Banzai Fans. Durch einen Kauf wird ihr Lieblingscreator unterstützt und sie erhalten ein Stück Jank für ihr Zuhause."
+    },
+
+    {
+        woerter: [
+            "scam",
+            "betrug",
+            "Saftladen"
+        ],
+
+        antwort:
+            ["Aber nicht doch...",
+            " Verstehn Sie? Weil 'nicht' und 'doch' zusammen 'nicht' ergiebt... Na egal, was ich sagen will ist das wir kein Saftladen sind."]
+    },
+
+
+    {
+        woerter: [
+            "bohne"
+        ],
+
+        antwort:
+            "Das BohnsaiShop Team hat tatsächlich mal überlegt, Bohnen im Shop anzubieten, sich aber dagegen entschieden, es auf Banzais Youtube Kanal bereits Genug Bohnen gibt."
+    },
+
+        {
+        woerter: [
+            "döner"
+        ],
+
+        antwort:
+            ["D̴̨̤̥̜̰͚͍̋̽͝ö̵̧̡̨̗͖̳͇̽̊̉̏́̓͂͛̚͘͠n̴͈͙̅̑̔͑̎̌́e̶̱̰̦̖̭̙̪̯̎͆͛͠ͅr̴̛̳͖̪̝̲̣͈͋̎̌̂̆͒̅",
+            " ",
+            "Sorry, da ist wohl kurz mein System abgestürzt.",
+              "Leider vertrage ich als Bot keinen Döner, da die Soße mich zerstören würde. Ich habe aber gehört, das Banzai gerne Döner isst. Vielleicht können Sie ihn ja mal fragen, ob er ihnen einen spendiert."
+            ]
+    },
+
+    {
+        woerter: [
+            
+            "funktioniert",
+            "tut",
+            "einwandfrei",
+            "geht",
+
+        ],
+
+        antwort:
+        "Es ist immer schön zu hören, wenn eines unserer Produkte funktioniert. Glauben Sie mir, das ist seeehr selten."
+
+    },
+
+
+    {
+        woerter: [
+            "danke",
+            "dankeschön",
+            "dank",
+            "tschüss",
+            "tschau",
+            "tschö",
+            "denne"
+        ],
+
+        antwort:
+            "Es freut mich, dass ich helfen konnte, komm doch gerne mal wieder vorbei, damit mein Code nicht einstaubt ^^"
+    },
+
+    {
+        woerter: [
+            "klopapier"
+        ],
+
+        antwort:
+            "Sie haben das jetzt nicht wirklich ernst genommen, oder?"
+    },
+
+        {
+        woerter: [
+            "pyramide"
+        ],
+
+        antwort:
+  [
+    "⠀",
+    "⠀⠀⠀",
+    "⠀⠀⠀⠀⠀",
+    "⠀⠀⠀⠀⠀⠀⠀",
+    "⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+    "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+    "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+    "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+    "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+    "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+    "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+    "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+    "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+    "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+    "⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+    "⠀⠀⠀⠀⠀⠀",
+    "⠀⠀⠀",
+    "⠀"
+]
+    },
+
+    {
+        woerter: [
+            "hallo",
+            "hi",
+            "hey",
+            "moin",
+            "servus",
+            "guten tag",
+            "guten morgen",
+            "guten abend"
+        ],
+
+        antwort:
+            "Herzlich Wilkommen im Bohnsai Support-center, was kann ich für Sie tun?"
+    }
+
+
+
+];
+
+
+
+/* ==========================================================
+   STANDARDANTWORTEN
+   ========================================================== */
+
+
+const standardAntworten = [
+
+    "Dazu liegen mir leider keine Informationen vor. Ich werde so tun, als hätte ich die Anfrage weitergeleitet.",
+
+    "Eine interessante Frage. Ich habe leider keine Ahnung.",
+
+    "Dafür ist momentan die zuständige Abteilung nicht erreichbar. Die zuständige Abteilung bin übrigens ich.",
+
+    "Ich habe Ihre Anfrage zur Kenntnis genommen. Was ich damit mache, ist allerdings noch unklar.",
+
+    "Leider konnte ich dazu nichts finden. Vielleicht versuchen Sie es mit einer anderen Frage.",
+
+    "Sorry, ich habe Döner gerochen und nicht zugehört, könnten sie ihre Frage vielleicht etwas umformulieren?",
+
+    "Entweder ist Ihre Sprache zu kompliziert oder ich bin einfach zu dumm.",
+
+    "Interessante Frage. Ich würde sie gerne an das Publikum weitergeben.",
+
+    "Ich verstehe (nicht).",
+
+    "Ich konnte zum Thema Klopapier leider nichts finden... Wenn sie etwas anderes meinten, korrigieren sie mich gerne.",
+
+    "Darauf gibt es eine Antwort, nur nicht hier",
+
+    "Ich würde ja sagen, das es einen Netzwerkfehler gab, aber das ist durch meine Programmierung leider nicht möglich... Versuchen sie bitte etwas anderes.",
+
+
+];
+
+
+/* ==========================================================
+   ANTWORT SUCHEN
+   ========================================================== */
+
+
+function getBotAnswer(text) {
+
+    const nachricht =
+        text.toLowerCase().trim();
+
+
+    /*
+       Alle Antwortgruppen durchsuchen.
+
+       Sobald EIN Wort passt, wird diese
+       Antwort verwendet.
+    */
+
+    for (const gruppe of antworten) {
+
+        const gefunden =
+            gruppe.woerter.some(
+                wort =>
+                    nachricht.includes(
+                        wort.toLowerCase()
+                    )
+            );
+
+
+        if (gefunden) {
+
+            return gruppe.antwort;
+
+        }
+
+    }
+
+
+    /*
+       Keine Übereinstimmung:
+       zufällige Standardantwort.
+    */
+
+
+    const zufall =
+        Math.floor(
+            Math.random()
+            *
+            standardAntworten.length
+        );
+
+
+    return standardAntworten[zufall];
+
+}
+
+
+
+/* ==========================================================
+   NACHRICHT HINZUFÜGEN
+   ========================================================== */
+
+
+function addMessage(text, type) {
+
+    const messages =
+        document.getElementById("messages");
+
+
+    const message =
+        document.createElement("div");
+
+
+    message.className =
+        "message " + type;
+
+
+    /*
+       textContent verhindert,
+       dass HTML aus Benutzereingaben
+       ausgeführt wird.
+    */
+
+
+    message.textContent =
+        text;
+
+
+    const typing =
+        document.getElementById("typing");
+
+
+    messages.insertBefore(
+        message,
+        typing
+    );
+
+
+    messages.scrollTop =
+        messages.scrollHeight;
+
+}
+
+
+
+/* ==========================================================
+   MEHRERE BOT-NACHRICHTEN
+   ========================================================== */
+
+
+function showBotMessages(antwort) {
+
+
+    /*
+       NORMALE ANTWORT
+
+       Beispiel:
+
+       antwort:
+           "Hallo!"
+    */
+
+
+    if (!Array.isArray(antwort)) {
+
+        addMessage(
+            antwort,
+            "bot"
+        );
+
+        return;
+
+    }
+
+
+    /*
+       MEHRERE ANTWORTEN
+
+       Beispiel:
+
+       antwort: [
+           "Hallo!",
+           "Wie geht es dir?",
+           "^^"
+       ]
+
+       Jede Nachricht erscheint
+       separat mit 1,2 Sekunden Abstand.
+    */
+
+
+    antwort.forEach(
+        function(nachricht, index) {
+
+
+            setTimeout(
+                function() {
+
+                    addMessage(
+                        nachricht,
+                        "bot"
+                    );
+
+                },
+
+                index * 1200
+
+            );
+
+        }
+    );
+
+}
+
+
+
+/* ==========================================================
+   NACHRICHT SENDEN
+   ========================================================== */
+
+
+function sendMessage() {
+
+
+    const input =
+        document.getElementById("input");
+
+
+    const text =
+        input.value.trim();
+
+
+    /*
+       Leere Nachrichten ignorieren.
+    */
+
+    if (!text) {
+
+        return;
+
+    }
+
+
+    /*
+       Benutzer-Nachricht anzeigen.
+    */
+
+    addMessage(
+        text,
+        "user"
+    );
+
+
+    /*
+       Eingabefeld leeren.
+    */
+
+    input.value = "";
+
+
+    /*
+       "Bohnsai schreibt..."
+       anzeigen.
+    */
+
+    const typing =
+        document.getElementById("typing");
+
+
+    typing.style.display =
+        "block";
+
+
+    const messages =
+        document.getElementById("messages");
+
+
+    messages.scrollTop =
+        messages.scrollHeight;
+
+
+    /*
+       Nach 700 ms antworten.
+    */
+
+    setTimeout(
+        function() {
+
+
+            typing.style.display =
+                "none";
+
+
+            /*
+               Antwort suchen.
+            */
+
+            const antwort =
+                getBotAnswer(text);
+
+
+            /*
+               Antwort anzeigen.
+            */
+
+            showBotMessages(
+                antwort
+            );
+
+
+        },
+
+        700
+
+    );
+
+}
+
+
+
+/* ==========================================================
+   ENTER-TASTE
+   ========================================================== */
+
+
+document
+    .getElementById("input")
+    .addEventListener(
+        "keydown",
+        function(event) {
+
+
+            if (event.key === "Enter") {
+
+                sendMessage();
+
+            }
+
+        }
+    );
+
+
+</script>
+
+
+</body>
+
+</html>
